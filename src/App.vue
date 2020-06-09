@@ -193,7 +193,7 @@ export default {
   },
   created() {
     this.setTags(this.$route);
-    console.log(this.$route.matched);
+    // console.log(this.$route.matched);
   }
 };
 </script>

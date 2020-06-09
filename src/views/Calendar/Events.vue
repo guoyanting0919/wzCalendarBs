@@ -57,7 +57,23 @@
       <el-scrollbar class="scrollbar-handle">
         <div class="inputBox">
           <div class="inputTitle">事件名稱</div>
-          <el-input style="width:350px" v-model="eventNameInput" placeholder="請輸入事件名稱"></el-input>
+          <el-input
+            type="textarea"
+            :rows="2"
+            style="width:350px"
+            v-model="eventNameInput"
+            placeholder="請輸入事件名稱"
+          ></el-input>
+        </div>
+        <div class="inputBox">
+          <div class="inputTitle">事件描述</div>
+          <el-input
+            type="textarea"
+            :rows="2"
+            style="width:350px"
+            v-model="inputDescription"
+            placeholder="請輸入事件描述"
+          ></el-input>
         </div>
         <div class="inputBox">
           <div class="inputTitle">行事曆類別</div>
@@ -207,6 +223,7 @@ export default {
   data() {
     return {
       eventNameInput: "",
+      inputDescription: "",
       multipleSelection: [],
       changeMember: "",
       newChangeMember: "",
