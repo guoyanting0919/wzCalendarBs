@@ -4,7 +4,8 @@
       <el-container class="mainLayout">
         <!-- header -->
         <el-header class="mainLayoutHeader">
-          <div class="logoBox">文藻日曆系統後台</div>
+          <div class="logoBox" v-if="!isCollapse">文藻行事曆系統後台</div>
+          <div class="logoBox logoBoxCollapse" v-else>W.Z</div>
           <div class="breads">
             <i
               :class="{'activeBar':isCollapse}"
@@ -36,10 +37,11 @@
           </div>
         </el-header>
         <el-container>
-          <el-aside width="200px" class="mainLayoutAside">
+          <el-aside class="mainLayoutAside" :class="{'isCollapse':isCollapse}">
             <!-- aside -->
             <el-menu
               :default-active="$route.path"
+              :collapse-transition="false"
               class="sideBar"
               :unique-opened="uniqueOp"
               :collapse="isCollapse"
@@ -221,6 +223,12 @@ $color-primary: #2f3e52;
     height: calc(100vh - 60px);
     background: $color-primary;
     color: #fff;
+    transition: 0.5s;
+    width: 200px !important;
+
+    &.isCollapse {
+      width: auto !important;
+    }
   }
 
   .logoBox {
@@ -232,6 +240,10 @@ $color-primary: #2f3e52;
     font-size: 18px;
     border-right: 1px solid rgba(238, 241, 146, 0.3);
     font-weight: 700;
+
+    &.logoBoxCollapse {
+      width: 64px;
+    }
   }
 
   .breads {
@@ -311,5 +323,19 @@ $color-primary: #2f3e52;
       color: #fff;
     }
   }
+
+  .el-menu {
+    border-right: none;
+  }
+
+  .el-submenu__icon-arrow {
+    top: 56% !important;
+    right: 10px !important;
+  }
+}
+
+.el-menu--vertical {
+  border-top: 9px solid transparent;
+  border-left: 4px solid transparent;
 }
 </style>

@@ -17,7 +17,7 @@ const createRouter = () =>
         name: "Home",
         component: Home,
         meta: {
-          title: "歡迎頁",
+          title: "後臺首頁",
         },
         children: [
           {

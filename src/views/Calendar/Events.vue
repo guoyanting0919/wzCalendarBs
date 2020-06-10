@@ -2,11 +2,27 @@
   <div class="calendarEvent">
     <!-- searchBox -->
     <div class="searchBox">
-      <el-input style="width:240px" v-model="keyWordInput" placeholder="關鍵字"></el-input>
+      <el-input
+        style="width:240px"
+        v-model="keyWordInput"
+        placeholder="關鍵字"
+      ></el-input>
       <el-button class="searchBtn" type="primary">搜尋</el-button>
-      <el-button @click="handleAddOrEdit('add')" class="addBtn" type="primary">新增</el-button>
-      <el-button @click="changeDialogVisible = true" class="changeBtn" type="primary">批次替換</el-button>
-      <el-button @click="importDialogVisible = true" class="importBtn" type="primary">匯入</el-button>
+      <el-button @click="handleAddOrEdit('add')" class="addBtn" type="primary"
+        >新增</el-button
+      >
+      <el-button
+        @click="changeDialogVisible = true"
+        class="changeBtn"
+        type="primary"
+        >批次替換</el-button
+      >
+      <el-button
+        @click="importDialogVisible = true"
+        class="importBtn"
+        type="primary"
+        >匯入</el-button
+      >
       <el-button class="exportBtn" type="primary">匯出</el-button>
     </div>
 
@@ -16,12 +32,20 @@
         <el-table
           :data="tableData"
           style="width: 100%"
-          :default-sort="{prop: 'date', order: 'descending'}"
+          :default-sort="{ prop: 'date', order: 'descending' }"
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55"></el-table-column>
-          <el-table-column prop="eventName" label="事件名稱" sortable></el-table-column>
-          <el-table-column prop="eventCategory" label="行事曆類別" sortable></el-table-column>
+          <el-table-column
+            prop="eventName"
+            label="事件名稱"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            prop="eventCategory"
+            label="行事曆類別"
+            sortable
+          ></el-table-column>
           <el-table-column prop="showDate" label="顯示時間" sortable>
             <template slot-scope="scope">
               <div class="showDateBox">
@@ -40,12 +64,32 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="eventSite" label="地址" sortable></el-table-column>
+          <el-table-column
+            prop="eventSite"
+            label="地址"
+            sortable
+          ></el-table-column>
           <el-table-column prop="emit" label="操作">
             <template slot-scope="scope">
-              <el-button class="outline" size="mini" @click="handleCopy(scope.row)">複製</el-button>
-              <el-button class="outline" size="mini" @click="handleAddOrEdit('edit',scope.row)">編輯</el-button>
-              <el-button type="danger" class="outline" size="mini" @click="handleDel(scope.row)">刪除</el-button>
+              <el-button
+                class="outline"
+                size="mini"
+                @click="handleCopy(scope.row)"
+                >複製</el-button
+              >
+              <el-button
+                class="outline"
+                size="mini"
+                @click="handleAddOrEdit('edit', scope.row)"
+                >編輯</el-button
+              >
+              <el-button
+                type="danger"
+                class="outline"
+                size="mini"
+                @click="handleDel(scope.row)"
+                >刪除</el-button
+              >
             </template>
           </el-table-column>
         </el-table>
@@ -53,14 +97,18 @@
     </div>
 
     <!-- addOrEditDialog -->
-    <el-dialog :close-on-click-modal="false" title="新增" :visible.sync="addOuterVisible">
+    <el-dialog
+      :close-on-click-modal="false"
+      title="新增"
+      :visible.sync="addOuterVisible"
+    >
       <el-scrollbar class="scrollbar-handle">
         <div class="inputBox">
           <div class="inputTitle">事件名稱</div>
           <el-input
             type="textarea"
             :rows="2"
-            style="width:350px"
+            style="width:550px"
             v-model="eventNameInput"
             placeholder="請輸入事件名稱"
           ></el-input>
@@ -70,14 +118,17 @@
           <el-input
             type="textarea"
             :rows="2"
-            style="width:350px"
+            style="width:550px"
             v-model="inputDescription"
             placeholder="請輸入事件描述"
           ></el-input>
         </div>
         <div class="inputBox">
           <div class="inputTitle">行事曆類別</div>
-          <el-select v-model="eventCategorySelete" placeholder="請選擇行事曆類別">
+          <el-select
+            v-model="eventCategorySelete"
+            placeholder="請選擇行事曆類別"
+          >
             <el-option value="111">111111</el-option>
             <el-option value="2222">222222</el-option>
           </el-select>
@@ -104,11 +155,19 @@
         </div>
         <div class="inputBox">
           <div class="inputTitle">會議/活動地址</div>
-          <el-input style="width:700px" v-model="eventSiteInput" placeholder="請輸入會議/活動地點"></el-input>
+          <el-input
+            style="width:700px"
+            v-model="eventSiteInput"
+            placeholder="請輸入會議/活動地點"
+          ></el-input>
         </div>
         <div class="inputBox">
           <div class="inputTitle">連結</div>
-          <el-input style="width:700px" v-model="eventUrlInput" placeholder="請輸入會議/活動連結"></el-input>
+          <el-input
+            style="width:700px"
+            v-model="eventUrlInput"
+            placeholder="請輸入會議/活動連結"
+          ></el-input>
         </div>
         <div class="inputBox">
           <div class="inputTitle">上傳文件</div>
@@ -124,7 +183,9 @@
         <div class="inputBox" style="align-items:flex-start">
           <div class="inputTitle">參與人員</div>
           <div>
-            <el-checkbox class="relatedCheck" v-model="isRelated">是否關聯</el-checkbox>
+            <el-checkbox class="relatedCheck" v-model="isRelated"
+              >是否關聯</el-checkbox
+            >
             <div class="selectBox">
               <el-select v-model="unit1" placeholder="單位一">
                 <el-option value="111">單位1</el-option>
@@ -156,18 +217,36 @@
         <div class="inputBox" style="align-items:flex-start">
           <div class="inputTitle"></div>
           <el-table :data="tableData2" style="width: 100%">
-            <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-            <el-table-column prop="title" label="職稱" width="180"></el-table-column>
+            <el-table-column
+              prop="name"
+              label="姓名"
+              width="180"
+            ></el-table-column>
+            <el-table-column
+              prop="title"
+              label="職稱"
+              width="180"
+            ></el-table-column>
             <el-table-column prop="unit" label="單位"></el-table-column>
             <el-table-column prop label="刪除">
               <template slot-scope="scope">
-                <el-button size="mini" type="danger" @click="delMember(scope.row)">刪除</el-button>
+                <el-button
+                  size="mini"
+                  type="danger"
+                  @click="delMember(scope.row)"
+                  >刪除</el-button
+                >
               </template>
             </el-table-column>
           </el-table>
         </div>
       </el-scrollbar>
-      <el-dialog width="30%" title :visible.sync="addInnerVisible" append-to-body>
+      <el-dialog
+        width="30%"
+        title
+        :visible.sync="addInnerVisible"
+        append-to-body
+      >
         <p>xxx已有活動，是否確認提交</p>
         <div slot="footer" class="dialog-footer">
           <el-button @click="addInnerVisible = false">取 消</el-button>
@@ -176,7 +255,9 @@
       </el-dialog>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addOuterVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addInnerVisible = true">提 交</el-button>
+        <el-button type="primary" @click="addInnerVisible = true"
+          >提 交</el-button
+        >
       </div>
     </el-dialog>
 
@@ -196,7 +277,9 @@
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="changeDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="changeDialogVisible = false">提 交</el-button>
+        <el-button type="primary" @click="changeDialogVisible = false"
+          >提 交</el-button
+        >
       </span>
     </el-dialog>
 
@@ -212,7 +295,9 @@
       </el-upload>
       <span slot="footer" class="dialog-footer">
         <el-button @click="importDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="importDialogVisible = false">匯 入</el-button>
+        <el-button type="primary" @click="importDialogVisible = false"
+          >匯 入</el-button
+        >
       </span>
     </el-dialog>
   </div>
@@ -249,7 +334,7 @@ export default {
           showEndDate: "2020-06-01",
           eventStartDate: "2020-05-12",
           eventEndDate: "2020-05-22 ",
-          emit: 1
+          emit: 1,
         },
         {
           eventName: "活動B",
@@ -259,7 +344,7 @@ export default {
           showEndDate: "2019-07-01",
           eventStartDate: "2020-05-13",
           eventEndDate: "2020-05-22 ",
-          emit: 1
+          emit: 1,
         },
         {
           eventName: "重大會議A",
@@ -269,35 +354,35 @@ export default {
           showEndDate: "2020-06-01",
           eventStartDate: "2020-05-14",
           eventEndDate: "2020-05-22 ",
-          emit: 1
-        }
+          emit: 1,
+        },
       ],
       tableData2: [
         {
           title: "主任",
           name: "王小虎",
-          unit: "Unit1"
+          unit: "Unit1",
         },
         {
           title: "教師",
           name: "王小虎",
-          unit: "Unit2"
+          unit: "Unit2",
         },
         {
           title: "教授",
           name: "王小虎",
-          unit: "Unit3"
+          unit: "Unit3",
         },
         {
           title: "校長",
           name: "王小虎",
-          unit: "Unit1"
-        }
+          unit: "Unit1",
+        },
       ],
       addOuterVisible: false,
       addInnerVisible: false,
       importDialogVisible: false,
-      changeDialogVisible: false
+      changeDialogVisible: false,
     };
   },
   methods: {
@@ -318,7 +403,7 @@ export default {
       this.$notify({
         title: "刪除成功",
         message: "已成功刪除該事件",
-        type: "success"
+        type: "success",
       });
     },
     handleSelectionChange(val) {
@@ -331,14 +416,14 @@ export default {
       this.$notify({
         title: "成功",
         message: "添加成功",
-        type: "success"
+        type: "success",
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .calendarEvent {
   padding: 0 1.25rem;
 

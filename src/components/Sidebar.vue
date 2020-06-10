@@ -12,7 +12,7 @@
             class="fa"
             :class="item.iconCls"
           ></i>
-          <span class="title-name" slot="title">{{item.name}}</span>
+          <span class="title-name" slot="title" v-if="!isCollapse">{{item.name}}</span>
         </template>
         <template v-for="child in item.children">
           <!-- 這裡實現自己遞歸嵌套 -->
@@ -88,10 +88,11 @@ export default {
 .sideBar {
   border: none;
 }
-.el-submenu {
-  width: 200px;
-}
 .fa {
   margin-right: 0.5rem;
+}
+.el-submenu__icon-arrow {
+  top: 56% !important;
+  right: 10px !important;
 }
 </style>
